@@ -1,15 +1,26 @@
+import java.util.ArrayList;
+
 public class Banco {
     
     private String nome;
     private Conta[] contas;
+    private ArrayList<Cliente> clientes;
 
     private int posicaoLivre = 0;
 
     public Banco(String nome, int quantideContas){
         this.nome = nome;
         this.contas = new Conta[quantideContas]; // criando as posições do vetor
+        this.clientes = new ArrayList<>();
     }
 
+    public boolean adicionar(Cliente novo){
+        if(buscarClienteCpf(novo.getCpf())!=null){
+            return false;
+        }
+        this.clientes.add(novo);
+        return true;
+    }
 
     public boolean adicionar(Conta nova){
         if(posicaoLivre < contas.length){
@@ -21,6 +32,15 @@ public class Banco {
 
         return false;
         
+    }
+
+    public Cliente buscarClienteCpf(String cpf){
+        for(Cliente c:clientes){
+            if(c.getCpf().equals(cpf)){
+                return c;
+            }
+        }
+        return null;
     }
 
 
@@ -78,6 +98,17 @@ public class Banco {
     }
 
 
+    public boolean removerCLiente(String cpf){
+        Cliente c = buscarClienteCpf(cpf);
+
+        if(c != null){
+            clientes.remove(c);
+            return true;
+        }
+        return false;
+    }
+
+
     public String toString(){
         String str = "Contas:\n";
 
@@ -89,6 +120,18 @@ public class Banco {
                 str += "\tVazio!\n";
             }
             
+        }
+
+        str += "\nClientes:\n";
+        if(clientes.size() == 0){
+            str += "\tVazio!";
+        }else{
+            for(Cliente c:clientes){
+                str += "\t"+c.toString()+"\n";
+            }
+            /*for(int i=0;i<clientes.size();i++){
+             * str += "\t"+clientes.get(i).toString()+"\n";
+            } */
         }
 
         return str;

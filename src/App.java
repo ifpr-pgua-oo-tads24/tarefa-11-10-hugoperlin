@@ -17,21 +17,21 @@ public class App {
         conta1 = new Conta("234", "234", "Chico");
         banco.adicionar(conta1);
 
-        conta1 = new Conta("456", "456", "Maria");
-        banco.adicionar(conta1);
+        Cliente cliente = new Cliente( "Maria","1234");
+        banco.adicionar(cliente);
 
-        conta1 = new Conta("789", "789", "Hum");
-        banco.adicionar(conta1);
+        Cliente cliente2 = new Cliente("Zé","3456");
+        banco.adicionar(cliente2);
 
-        String retorno = banco.depositar("1111", "123", 100);
-        System.out.println(retorno);
-
-        retorno = banco.sacar("1111", "123", 50);
-        System.out.println(retorno);
-
+        Cliente cliente3 = new Cliente("Chico","6789");
+        banco.adicionar(cliente3);
 
         System.out.println(banco);
 
+        System.out.println("Removendo Meio");
+        banco.removerCLiente("3456");
+
+        System.out.println(banco);
 
     }
 
